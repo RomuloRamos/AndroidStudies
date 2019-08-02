@@ -1,0 +1,30 @@
+Registro apenas para fixaçao
+
+INTENTS
+Intents são objetos que declaram ao sistema a intençao de executar algum componente do sistema, podendo ser uma Activity, um Service, ou um Broadcast Receiver.
+Para utiliza-lo, basta passar a classe do componente alvo no momento do instanciamento do objeto Intent. Porém, há ainda uma outra forma de se utilizar um Intent (muito mais interessante), é através do modo implícito.
+Quando instanciado de modo implícito, um Intent aponta apenas para a açao que deseja executar (e, opcionalmente, os dados em que a açao deve ser executada). Dessa maneira, fica a cargo do sistema encontrar o componente capaz de 
+executar a ação e, caso haja mais de um, o usuário escolher.
+Para identificar um componente capaz de atender a um determinado intent implícito, o sistema compara o intent recebido com os filtros de intent fornecidos pelos arquivos de manifesto dos aplicativos instalados no dispositivo.
+Aplicativos podem declarar seus recursos acessíveis a outros aplicativos por intent através do arquivo manifest com a seguinte tag: <intent-filter>
+
+DECLARAÇAO DE REQUISITOS DO APLICATIVO
+Atualmente o Android está embarcado em uma diversidade muito grande de dispositivos. Cada qual com suas características e recursos.
+Dessa maneira, é necessário que os aplicativos declarem em seus arquivos de manifest quais recursos o mesmo nencessita para que possa funcionar corretamente.
+A maior parte dessas declarações é somente informativa. Porém, serviços externos como Google Play leem essas informaçoes para fins de filtragem a seus usuários.
+Por exemplo, se o aplicativo utilza uma câmera e APIs introduzidas no Android 2.1 (API de nível 7), deve-se declarar tais requisitos da seguinte maneira no arquivo de manifest:
+
+<manifest ... >
+    <uses-feature android:name="android.hardware.camera.any"
+                  android:required="true" />
+    <uses-sdk android:minSdkVersion="7" android:targetSdkVersion="19" />
+    ...
+</manifest>
+
+No entanto, também é possível declarar que o aplicativo usa a câmera como recurso não obrigatório. 
+Nesse caso, o aplicativo precisa definir o atributo required como "false" e verificar em tempo de execução se o dispositivo tem câmera e desativar os recursos da câmera conforme o necessário.
+
+
+
+INICIAR UMA ACTIVITY
+Caso seu aplicativo contenha mais de uma "tela" e troque informaçoes entre elas, é necessário inicializar a Activity referente a elas e declarar os intents refenrentes a tramitaçao dos dados.
