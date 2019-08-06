@@ -1,30 +1,44 @@
 package com.example.enviandoobjetosentreactivitys;
 
-public class Usuario {
+import java.io.Serializable;
+
+public class Usuario implements Serializable
+{
+
+    String sNome = "Nome indefinido";
+    String sEmail = "Email indefinido";
+    String sIdade = "N/A";
 
     public String getsNome() {
         return sNome;
-    }
-
-    public void setsNome(String sNome) {
-        this.sNome = sNome;
     }
 
     public String getsEmail() {
         return sEmail;
     }
 
+    public String getsIdade()
+    {
+        return this.sIdade;
+    }
+
+    public void setsNome(String sNome) {
+        this.sNome = sNome;
+    }
+
     public void setsEmail(String sEmail) {
         this.sEmail = sEmail;
     }
 
-    String sNome = "Nome indefinido";
-    String sEmail = "Email indefinido";
-
-    public Usuario(String sNome, String sEmail)
+    public void setsIdade(String sIdade)
     {
-        this.sNome = sNome;
-        this.sEmail = sEmail;
+        this.sIdade = sIdade;
     }
+
+//    public Usuario(String sNome, String sEmail)
+//    {
+//        this.sNome = sNome;
+//        this.sEmail = sEmail;
+//    }
 
 }
