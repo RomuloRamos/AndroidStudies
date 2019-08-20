@@ -6,16 +6,18 @@ import android.widget.TextView;
 
 public class SegundaActivity extends AppCompatActivity {
 
-    private TextView textNome, textIdade;
+    private TextView textNome, textIdade, textEmail;
     private Usuario secActUsuario;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_segunda);
 
         textIdade = findViewById(R.id.SecActIdade);
         textNome = findViewById(R.id.SecActNome);
+        textEmail = findViewById(R.id.secActEmail);
 
         //Recuperando os Dados enviados pela primeira Activity (Para isso utiliza-se Bundle)
         Bundle dados = getIntent().getExtras();
@@ -27,5 +29,6 @@ public class SegundaActivity extends AppCompatActivity {
         //Configurando valores recebino na Activity
         textNome.setText(secActUsuario.getsNome());
         textIdade.setText(secActUsuario.getsIdade());
+        textEmail.setText(secActUsuario.getsEmail());
     }
 }
