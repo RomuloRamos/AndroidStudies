@@ -28,33 +28,80 @@ public class MainActivity extends AppCompatActivity {
             * com duas colunas: nome (do tipo string), e uma idade (do tipo INT com limitaçao de 3
             * algarismos, ex: "999")
             ***************************************************************************************/
-            bancoDados.execSQL("CREATE TABLE IF NOT EXISTS pessoas (nome VARCHAR, idade INT(3))");
+            bancoDados.execSQL("CREATE TABLE IF NOT EXISTS pessoas (id INTEGER PRIMARY KEY AUTOINCREMENT, nome VARCHAR, idade INT(3))");
+//            bancoDados.execSQL("DROP TABLE pessoas");//Comando para apagar tabela
 
-            //Inserir dados
-            bancoDados.execSQL("INSERT INTO pessoas(nome, idade) VALUES('Rômulo',29)");
-            bancoDados.execSQL("INSERT INTO pessoas(nome, idade) VALUES('Bianca',32)");
 
+            //Checar se já não ha registros, para não duplicar
             //Recuperar "pessoas"
             /***************************************************************************************
-            * O método abaixo é utilzado para recuperar registros do Banco de dados
-            ***************************************************************************************/
-            Cursor cursor = bancoDados.rawQuery("SELECT nome, idade FROM pessoas",null);
+             * O método abaixo é utilzado para recuperar registros do Banco de dados
+             ***************************************************************************************/
+            String strSqlCommandConsulta =
+                    " SELECT * FROM pessoas ";//Seleciona todos os campos "*" da tabela pessoas
 
-            //Indices da tabela "pessoas"
-            //Relacionar com Array de 2 dimensões, talvez.
-            int intIndiceNome = cursor.getColumnIndex("nome");//Será 0
-            int intIndiceIdade = cursor.getColumnIndex("idade");//Será 1
+            Cursor cursor = bancoDados.rawQuery(strSqlCommandConsulta, null);
 
-            cursor.moveToFirst();//Para que o cursor volte a sua posiçao inicial na lista
-
-            while (cursor != null)
+            if(cursor.getCount()<=0)
             {
-                String strNome = cursor.getString(intIndiceNome);
-                String strIdade = cursor.getString(intIndiceIdade);
-                Log.i("RESULTADO = Nome ", strNome + "idade: " + strIdade);
-                cursor.moveToNext();//Para que o cursor aponte para a proxima posição
+                Log.i("LESSON - ","INSERINDO DADOS NA TABELA...");
+                //Inserir dados
+                bancoDados.execSQL("INSERT INTO pessoas(nome, idade) VALUES('Rômulo',29)");
+                bancoDados.execSQL("INSERT INTO pessoas(nome, idade) VALUES('Bianca',32)");
+                bancoDados.execSQL("INSERT INTO pessoas(nome, idade) VALUES('Carlayne',23)");
+                bancoDados.execSQL("INSERT INTO pessoas(nome, idade) VALUES('Wellen',33)");
             }
+            else
+            {
+                Log.i("LESSON - ","TABELA JA PREENCHIDA, NÃO INSERIR, SOMENTE ATUALIZAR...");
+                bancoDados.execSQL("UPDATE pessoas SET idade = 33 WHERE nome = 'Wellen'");
+            }
+            int iLessons = 3;
+            for (int iCount = 0; iCount <= iLessons ; iCount++)
+            {
 
+                if(iCount == 0)
+                {
+                    Log.i("LESSON 1 - ","RECUPERANDO OS RESULTADOS INSERIDOS SEM ALTERAÇÃO:");
+
+                }
+                else if(iCount == 1)
+                {
+                    Log.i("LESSON 2 - ","ATUALIZANDO IDADE DE WELLEN PARA 34: ");
+                    bancoDados.execSQL("UPDATE pessoas SET idade = 34 WHERE nome = 'Wellen'");
+                }
+                else if(iCount == 2)
+                {
+                    Log.i("LESSON 3 -", "APAGANDO LINHA PELO ID: ");
+                    bancoDados.execSQL("DELETE FROM pessoas WHERE id = 3");
+                }
+                else if(iCount == 3)
+                {
+                    Log.i("LESSON 4 - ","APAGANDO TODOS OS REGISTROS...");
+                    bancoDados.execSQL("DELETE FROM pessoas");//Apaga todos os itens da tabela
+                    bancoDados.execSQL("DELETE FROM sqlite_sequence WHERE name = 'pessoas'");//Apaga os ids autoincrementados
+                }
+                strSqlCommandConsulta = "SELECT id, nome, idade FROM pessoas "+
+                        "WHERE 1=1 ORDER BY id";
+                cursor = bancoDados.rawQuery(strSqlCommandConsulta, null);
+
+                //Indices da tabela "pessoas"
+                //Relacionar com Array de 2 dimensões, talvez.
+                int intIndiceId = cursor.getColumnIndex("id");//Será 0
+                int intIndiceNome = cursor.getColumnIndex("nome");//Será 1
+                int intIndiceIdade = cursor.getColumnIndex("idade");//Será 2
+
+                cursor.moveToFirst();//Para que o cursor volte a sua posiçao inicial na lista
+                int iTotalRows = cursor.getCount();
+                for(int iCounterRows = 0; iCounterRows < iTotalRows; iCounterRows++)
+                {
+                    String strId = cursor.getString(intIndiceId);
+                    String strNome = cursor.getString(intIndiceNome);
+                    String strIdade = cursor.getString(intIndiceIdade);
+                    Log.i("RESULTADO = Id", strId + ") NOME: " + strNome + " ,IDADE: " + strIdade);
+                    cursor.moveToNext();//Para que o cursor aponte para a proxima posição
+                }
+            }
 
         }
         catch (Exception e)
