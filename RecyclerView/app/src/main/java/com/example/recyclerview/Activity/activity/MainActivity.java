@@ -6,9 +6,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import com.example.recyclerview.Activity.RecyclerItemClickListener;
 import com.example.recyclerview.Activity.adaptor.Adapter;
 import com.example.recyclerview.Activity.model.Filme;
 import com.example.recyclerview.R;
@@ -41,6 +45,39 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayout.VERTICAL));
         recyclerView.setAdapter(adapter);
 
+        //Adding click event to list item:
+        recyclerView.addOnItemTouchListener(
+            new RecyclerItemClickListener(
+                    getApplicationContext(),
+                    recyclerView,
+                    new RecyclerItemClickListener.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(View view, int position) {
+                            Filme filme = listaFilmes.get(position);
+                            Toast.makeText(
+                                    getApplicationContext(),
+                                    "Item pressionado: "+filme.getStrTitulo(),
+                                    Toast.LENGTH_SHORT
+                            ).show();
+                        }
+
+                        @Override
+                        public void onLongItemClick(View view, int position) {
+                            Filme filme = listaFilmes.get(position);
+                            Toast.makeText(
+                                    getApplicationContext(),
+                                    "Click Longo: "+ filme.getStrTitulo(),
+                                    Toast.LENGTH_SHORT
+                            ).show();
+                        }
+
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                        }
+                    }
+            )
+        );
     }
 
     public void criarFilmes()
