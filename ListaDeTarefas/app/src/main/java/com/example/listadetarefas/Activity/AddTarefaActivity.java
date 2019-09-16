@@ -1,7 +1,9 @@
-package com.example.listadetarefas;
+package com.example.listadetarefas.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.listadetarefas.R;
 
 public class AddTarefaActivity extends AppCompatActivity {
 
