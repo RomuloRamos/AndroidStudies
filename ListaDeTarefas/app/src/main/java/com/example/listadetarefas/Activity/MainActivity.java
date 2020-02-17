@@ -8,14 +8,18 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 
 import com.example.listadetarefas.Adapter.TarefaAdapter;
 import com.example.listadetarefas.Model.Tarefa;
 import com.example.listadetarefas.R;
+import com.example.listadetarefas.helper.DbHelper;
+import com.example.listadetarefas.helper.RecyclerItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +39,29 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.rcviewTarefas);
 
+        //Adicionar evento de clique
+        recyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(
+                        getApplicationContext(),
+                        recyclerView,
+                        new RecyclerItemClickListener.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, int position) {
+                                Log.i("clique", "onItemClick");
+                            }
+
+                            @Override
+                            public void onLongItemClick(View view, int position) {
+                                Log.i("clique","onLongItemClick");
+                            }
+
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                            }
+                        }
+                )
+        );
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), LinearLayout.VERTICAL));
         recyclerView.setAdapter(tarefaAdapter);
     }
-
+    //Assim, cada vez que o usuário sai e volta na tela do app, a lista é recarregada
     protected void onStart()
     {
         carregarListaTarefas();

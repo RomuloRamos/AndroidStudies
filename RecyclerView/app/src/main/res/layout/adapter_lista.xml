@@ -11,16 +11,16 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/txvTitulo"
+            android:id="@+id/textViewTitulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="4"
+            android:layout_weight="5"
             android:text="Titulo"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/txvAno"
+            android:id="@+id/textViewAno"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -28,7 +28,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/txvGenero"
+        android:id="@+id/textViewGenero"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Genero" />

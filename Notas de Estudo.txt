@@ -28,3 +28,9 @@ Nesse caso, o aplicativo precisa definir o atributo required como "false" e veri
 
 INICIAR UMA ACTIVITY
 Caso seu aplicativo contenha mais de uma "tela" e troque informaçoes entre elas, é necessário inicializar a Activity referente a elas e declarar os intents refenrentes a tramitaçao dos dados.
+
+
+Recycler View
+É o componente indicado pelo Google para mostrar conteúdo em lista.
+Para sua utilização, pode-se contar com outro componente, chamado Adapter. Este componente é responsável por tratar os dados a serem exibidos, de maneira a adapta-los 
+para a exibição no Recycler View.
