@@ -13,10 +13,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="10dp">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/textNome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Rômulo Ramos"
@@ -30,14 +31,16 @@
                 android:text="Agora mesmo" />
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/imageImagem"
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:scaleType="centerCrop"
                 app:srcCompat="@drawable/imagem1" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/textPostagem"
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="#tbt viagem legal" />
@@ -51,17 +54,21 @@
 
             <Button
                 android:id="@+id/button"
+                style="?attr/buttonBarButtonStyle"
+                android:drawableLeft="@drawable/ic_gostei_cinza"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Button" />
+                android:text="Gostei" />
 
             <Button
                 android:id="@+id/button2"
+                style="?attr/buttonBarButtonStyle"
+                android:drawableLeft="@drawable/ic_comment_cinza"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Button" />
+                android:text="Comentar" />
         </LinearLayout>
     </LinearLayout>
 
