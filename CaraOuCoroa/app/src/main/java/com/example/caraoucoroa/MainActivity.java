@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         btJogar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Criando a Activity que envia o numero Randomico para a ActivityResultado
+                //Criando a Intent que envia o numero Randomico para a ActivityResultado
                 Intent intentResultado = new Intent(getApplicationContext(), ResultadoActivity.class);
 
                 //Gerando o numero randomico que resulta em cara ou coroa
