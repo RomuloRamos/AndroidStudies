@@ -25,7 +25,9 @@ public class ContatosFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment - Utilizado para converter um XML em uma View
+
+        // Inflate the layout for this fragment
+        //The LayoutInflater class is used to convert a XML file to a View
         View view = inflater.inflate(R.layout.fragment_contatos, container, false);
 
         textContato = view.findViewById(R.id.textContato);

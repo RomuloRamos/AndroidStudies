@@ -1,5 +1,6 @@
 package com.example.listadetarefas.Activity;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -20,6 +21,7 @@ import com.example.listadetarefas.Model.Tarefa;
 import com.example.listadetarefas.R;
 import com.example.listadetarefas.helper.DbHelper;
 import com.example.listadetarefas.helper.RecyclerItemClickListener;
+import com.example.listadetarefas.helper.TarefaDAO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private TarefaAdapter tarefaAdapter;
-    private List<Tarefa> listTarefas = new ArrayList<>();
+    private List<Tarefa> listTarefas; //= new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +49,13 @@ public class MainActivity extends AppCompatActivity {
                         new RecyclerItemClickListener.OnItemClickListener() {
                             @Override
                             public void onItemClick(View view, int position) {
-                                Log.i("clique", "onItemClick");
+                                //Recupera a tarefa selecionada pela sua posiçao no RecyclerView
+                                Tarefa tarefaSelecionada = listTarefas.get(position);
+                                //Envia a tarefa para a Activity de edição (mesma activity de adicionar tarefa)
+                                Intent intent = new Intent(MainActivity.this, AddTarefaActivity.class);
+                                intent.putExtra("tarefaSelecionada", tarefaSelecionada);
+
+                                startActivity(intent);
                             }
 
                             @Override
@@ -64,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         );
 
         FloatingActionButton fab = findViewById(R.id.fab);
+        //Configura um listner para chamar a Activity de adicionar tarefa sempre que o FloatingActionButton for selecionado.
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,13 +85,8 @@ public class MainActivity extends AppCompatActivity {
     public void carregarListaTarefas()
     {
         //Listar Tarefas
-        Tarefa tarefa1 = new Tarefa();
-        tarefa1.setStrNomeTarefa("Ir ao mercado ");
-        listTarefas.add(tarefa1);
-
-        Tarefa tarefa2 = new Tarefa();
-        tarefa2.setStrNomeTarefa("Ir a feira ");
-        listTarefas.add(tarefa2);
+        TarefaDAO tarefaDAO = new TarefaDAO(getApplicationContext());
+        listTarefas = tarefaDAO.list();
         /*
         *   Exibe Lista de Tarefas no RecyclerView
         */

@@ -22,7 +22,7 @@ public class TarefaAdapter extends RecyclerView.Adapter<TarefaAdapter.MyViewHold
     }
 
     @NonNull
-    @Override
+    @Override // This method returns one view holder instance to be filled with one item from list
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
         View itemLista = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.lista_tarefa_adapter, viewGroup, false);
@@ -30,14 +30,14 @@ public class TarefaAdapter extends RecyclerView.Adapter<TarefaAdapter.MyViewHold
         return new MyViewHolder(itemLista);
     }
 
-    @Override
+    @Override //This method fill one view of the list on recycler view with one item from list information that must be showed
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
 
         Tarefa tarefa = listTarefa.get(i);
         myViewHolder.tarefa.setText(tarefa.getStrNomeTarefa());
     }
 
-    @Override
+    @Override    //This method returns the total of items to be showed on Recycler View
     public int getItemCount()
     {
         return this.listTarefa.size();
